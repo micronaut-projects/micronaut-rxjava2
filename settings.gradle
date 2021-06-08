@@ -1,3 +1,4 @@
 rootProject.name = 'rxjava2'
 
 include 'rxjava2'
+include 'rxjava2-http-client'
