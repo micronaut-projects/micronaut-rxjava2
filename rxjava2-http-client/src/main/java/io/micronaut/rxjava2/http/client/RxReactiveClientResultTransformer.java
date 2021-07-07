@@ -41,7 +41,7 @@ public class RxReactiveClientResultTransformer implements ReactiveClientResultTr
     public Object transform(
         Object publisherResult) {
         if (publisherResult instanceof Maybe) {
-            Maybe<?> maybe = (Maybe) publisherResult;
+            Maybe<?> maybe = (Maybe<?>) publisherResult;
             // add 404 handling for maybe
             return maybe.onErrorResumeNext(throwable -> {
                 if (throwable instanceof HttpClientResponseException) {

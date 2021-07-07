@@ -20,6 +20,7 @@ import io.micronaut.core.type.Argument;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.client.StreamingHttpClient;
+import io.micronaut.rxjava2.http.client.RxHttpClient;
 import io.reactivex.Flowable;
 import org.reactivestreams.Publisher;
 

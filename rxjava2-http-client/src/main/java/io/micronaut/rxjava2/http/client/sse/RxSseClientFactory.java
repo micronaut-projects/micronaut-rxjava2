@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.rxjava2.http.client.websockets;
+package io.micronaut.rxjava2.http.client.sse;
 
 import io.micronaut.context.BeanContext;
 import io.micronaut.context.annotation.Bean;
@@ -27,37 +27,37 @@ import io.micronaut.http.client.ReactiveHttpClientRegistry;
 import io.micronaut.inject.InjectionPoint;
 
 /**
- * Factory interface for creating RxJava 2 {@link io.micronaut.websocket.WebSocketClient}.
-
+ * Factory interface for creating {@link io.micronaut.http.client.sse.SseClient}.
  * @author Sergio del Amo
- * @since 3.0.0
+ * @since 1.0.0
  */
 @Factory
-public class RxWebSocketClientFactory {
+public class RxSseClientFactory {
+
     private final ReactiveHttpClientRegistry<?, ?, ?, ?> clientRegistry;
 
     /**
      * Default constructor.
      * @param clientRegistry The client registry
      */
-    public RxWebSocketClientFactory(ReactiveHttpClientRegistry<?, ?, ?, ?> clientRegistry) {
+    public RxSseClientFactory(ReactiveHttpClientRegistry<?, ?, ?, ?> clientRegistry) {
         this.clientRegistry = clientRegistry;
     }
 
     /**
-     * Injects a {@link RxWebSocketClient} client at the given injection point.
+     * Injects a {@link RxSseClient} client at the given injection point.
      * @param injectionPoint The injection point
      * @param loadBalancer   The load balancer to use (Optional)
      * @param configuration  The configuration (Optional)
      * @param beanContext    The bean context to use
-     * @return The Streaming HTTP Client
+     * @return The SSE HTTP Client
      */
     @Bean
     @Secondary
-    protected RxWebSocketClient webSocketClient(@Nullable InjectionPoint<?> injectionPoint,
-                                                @Parameter @Nullable LoadBalancer loadBalancer,
-                                                @Parameter @Nullable HttpClientConfiguration configuration,
-                                                BeanContext beanContext) {
-        return new BridgedRxWebSocketClient(clientRegistry.resolveWebSocketClient(injectionPoint, loadBalancer, configuration, beanContext));
+    protected RxSseClient sseClient(@Nullable InjectionPoint<?> injectionPoint,
+                                    @Parameter @Nullable LoadBalancer loadBalancer,
+                                    @Parameter @Nullable HttpClientConfiguration configuration,
+                                    BeanContext beanContext) {
+        return new BridgedRxSseClient(clientRegistry.resolveSseClient(injectionPoint, loadBalancer, configuration, beanContext));
     }
 }

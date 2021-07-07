@@ -22,6 +22,7 @@ import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.client.HttpClient;
 import io.micronaut.http.client.HttpClientConfiguration;
+import io.micronaut.http.client.StreamingHttpClient;
 import io.reactivex.Flowable;
 
 import java.net.URL;
@@ -100,18 +101,7 @@ public interface RxHttpClient extends HttpClient {
     }
 
     /**
-     * Create a new {@link HttpClient}. Note that this method should only be used outside of the context of a
-     * Micronaut application. Within Micronaut use {@link jakarta.inject.Inject} to inject a client instead.
-     *
-     * @param url The base URL
-     * @return The client
-     */
-    static RxHttpClient create(@Nullable URL url) {
-        return new BridgedRxHttpClient(HttpClient.createStreamingClient(url));
-    }
-
-    /**
-     * Create a new {@link HttpClient} with the specified configuration. Note that this method should only be used
+     * Create a new {@link RxHttpClient} with the specified configuration. Note that this method should only be used
      * outside of the context of an application. Within Micronaut use {@link jakarta.inject.Inject} to inject a client instead
      *
      * @param url The base URL
@@ -120,6 +110,6 @@ public interface RxHttpClient extends HttpClient {
      * @since 2.2.0
      */
     static RxHttpClient create(@Nullable URL url, HttpClientConfiguration configuration) {
-        return new BridgedRxHttpClient(HttpClient.createStreamingClient(url, configuration));
+        return new BridgedRxHttpClient(StreamingHttpClient.create(url, configuration));
     }
 }

@@ -13,15 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.micronaut.rxjava2.http.client;
+package io.micronaut.rxjava2.http.client.sse;
 
 import io.micronaut.core.annotation.Internal;
 import io.micronaut.core.io.buffer.ByteBuffer;
 import io.micronaut.core.type.Argument;
 import io.micronaut.http.HttpRequest;
+import io.micronaut.http.client.HttpClient;
 import io.micronaut.http.client.sse.SseClient;
 import io.micronaut.http.sse.Event;
 import io.reactivex.Flowable;
+
+import java.io.Closeable;
+import java.io.IOException;
+import java.net.URL;
 
 /**
  * RxJava 2 bridge for the Server side events HTTP client.
@@ -30,7 +35,7 @@ import io.reactivex.Flowable;
  * @since 3.0.0
  */
 @Internal
-class BridgedRxSseClient implements RxSseClient {
+class BridgedRxSseClient implements RxSseClient, AutoCloseable  {
 
     private final SseClient sseClient;
 
@@ -65,5 +70,12 @@ class BridgedRxSseClient implements RxSseClient {
     @Override
     public <B> Flowable<Event<B>> eventStream(String uri, Argument<B> eventType) {
         return Flowable.fromPublisher(sseClient.eventStream(uri, eventType));
+    }
+
+    @Override
+    public void close() throws Exception {
+        if (sseClient instanceof AutoCloseable) {
+            ((AutoCloseable) sseClient).close();
+        }
     }
 }

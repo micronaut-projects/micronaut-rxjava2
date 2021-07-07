@@ -15,15 +15,16 @@
  */
 package io.micronaut.rxjava2.http.client;
 
+import io.micronaut.context.BeanContext;
 import io.micronaut.context.annotation.Bean;
 import io.micronaut.context.annotation.Factory;
 import io.micronaut.context.annotation.Parameter;
 import io.micronaut.context.annotation.Secondary;
 import io.micronaut.core.annotation.Nullable;
+import io.micronaut.http.client.HttpClientConfiguration;
+import io.micronaut.http.client.LoadBalancer;
 import io.micronaut.http.client.ReactiveHttpClientRegistry;
 import io.micronaut.inject.InjectionPoint;
-
-import java.net.URL;
 
 /**
  * Factory interface for creating clients.
@@ -32,7 +33,7 @@ import java.net.URL;
  * @since 2.0
  */
 @Factory
-public class RxHttpClientFactory {
+public class RxStreamingHttpClientFactory {
 
     private final ReactiveHttpClientRegistry<?, ?, ?, ?> clientRegistry;
 
@@ -40,39 +41,25 @@ public class RxHttpClientFactory {
      * Default constructor.
      * @param clientRegistry The client registry
      */
-    public RxHttpClientFactory(ReactiveHttpClientRegistry<?, ?, ?, ?> clientRegistry) {
+    public RxStreamingHttpClientFactory(ReactiveHttpClientRegistry<?, ?, ?, ?> clientRegistry) {
         this.clientRegistry = clientRegistry;
     }
 
-    /**
+     /**
      * Injects a {@link RxStreamingHttpClient} client at the given injection point.
+     *
      * @param injectionPoint The injection point
-     * @return The client
+     * @param loadBalancer   The load balancer to use (Optional)
+     * @param configuration  The configuration (Optional)
+     * @param beanContext    The bean context to use
+     * @return The Streaming HTTP Client
      */
     @Bean
     @Secondary
     protected RxStreamingHttpClient streamingHttpClient(@Nullable InjectionPoint<?> injectionPoint,
-                                                        @Nullable @Parameter URL url) {
-        if (url != null) {
-            return new BridgedRxHttpClient(url);
-        }
-        if (injectionPoint != null) {
-            return new BridgedRxHttpClient(clientRegistry.getStreamingClient(injectionPoint.getAnnotationMetadata()));
-        }
-        return new BridgedRxHttpClient(clientRegistry.getDefaultStreamingClient());
-    }
-
-    /**
-     * Injects a {@link RxStreamingHttpClient} client at the given injection point.
-     * @param injectionPoint The injection point
-     * @return The client
-     */
-    @Bean
-    @Secondary
-    protected RxSseClient sseHttpClient(@Nullable InjectionPoint<?> injectionPoint) {
-        if (injectionPoint != null) {
-            return new BridgedRxSseClient(clientRegistry.getSseClient(injectionPoint.getAnnotationMetadata()));
-        }
-        return new BridgedRxSseClient(clientRegistry.getDefaultSseClient());
+                                                        @Parameter @Nullable LoadBalancer loadBalancer,
+                                                        @Parameter @Nullable HttpClientConfiguration configuration,
+                                                        BeanContext beanContext) {
+        return new BridgedRxHttpClient(clientRegistry.resolveStreamingClient(injectionPoint, loadBalancer, configuration, beanContext));
     }
 }

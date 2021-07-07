@@ -36,7 +36,7 @@ import java.util.Map;
  * @since 3.0.0
  */
 @Internal
-public class BridgedRxHttpClient implements RxHttpClient, RxStreamingHttpClient {
+class BridgedRxHttpClient implements RxStreamingHttpClient {
 
     private final StreamingHttpClient streamingHttpClient;
 
@@ -44,15 +44,8 @@ public class BridgedRxHttpClient implements RxHttpClient, RxStreamingHttpClient 
      * Default constructor.
      * @param streamingHttpClient Streaming HTTP Client
      */
-    public BridgedRxHttpClient(StreamingHttpClient streamingHttpClient) {
+    BridgedRxHttpClient(StreamingHttpClient streamingHttpClient) {
         this.streamingHttpClient = streamingHttpClient;
-    }
-
-    /**
-     * @param url The URL
-     */
-    public BridgedRxHttpClient(URL url) {
-        this(HttpClient.createStreamingClient(url));
     }
 
     @Override
@@ -144,4 +137,6 @@ public class BridgedRxHttpClient implements RxHttpClient, RxStreamingHttpClient 
     public <I, O> Flowable<O> jsonStream(HttpRequest<I> request, Class<O> type) {
         return Flowable.fromPublisher(streamingHttpClient.jsonStream(request, type));
     }
+
+
 }

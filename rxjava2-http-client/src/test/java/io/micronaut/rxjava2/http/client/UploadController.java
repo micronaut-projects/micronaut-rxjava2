@@ -53,7 +53,6 @@ import java.util.concurrent.atomic.LongAdder;
  * @author Graeme Rocher
  * @since 1.0
  */
-@Singleton
 @Controller("/upload")
 public class UploadController {
 
