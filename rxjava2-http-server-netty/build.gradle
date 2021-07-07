@@ -1,0 +1,9 @@
+dependencies {
+    annotationProcessor "io.micronaut:micronaut-inject-java"
+    annotationProcessor "io.micronaut.docs:micronaut-docs-asciidoc-config-props:$micronautDocsVersion"
+    api "io.micronaut:micronaut-runtime"
+    api "io.micronaut:micronaut-http-server-netty"
+    api "io.reactivex.rxjava2:rxjava:$micronautRxJava2Version"
+    api "io.micronaut:micronaut-inject"
+
+}

@@ -5,5 +5,9 @@ dependencies {
     api project(":rxjava2")
     api "io.micronaut:micronaut-http-client"
 
-    testImplementation("io.micronaut:micronaut-http-server-netty")
+
+    testAnnotationProcessor "io.micronaut:micronaut-validation"
+    testImplementation "io.micronaut:micronaut-validation"
+    testImplementation 'org.codehaus.groovy:groovy-json'
+    testImplementation project(":rxjava2-http-server-netty")
 }

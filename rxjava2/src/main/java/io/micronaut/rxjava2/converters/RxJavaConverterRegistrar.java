@@ -25,9 +25,8 @@ import io.reactivex.Flowable;
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
+import jakarta.inject.Singleton;
 import org.reactivestreams.Publisher;
-
-import javax.inject.Singleton;
 
 /**
  * Converters for RxJava.

@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2021 original authors
+ * Copyright 2017-2020 original authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,16 @@
  * limitations under the License.
  */
 package io.micronaut.rxjava2.http.client;
+
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.io.buffer.ByteBuffer;
 import io.micronaut.core.type.Argument;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.client.HttpClient;
+import io.micronaut.http.client.HttpClientConfiguration;
 import io.reactivex.Flowable;
+
 import java.net.URL;
 
 /**
@@ -29,7 +32,7 @@ import java.net.URL;
  * @author graemerocher
  * @since 1.0
  */
-public interface Rx2HttpClient extends HttpClient {
+public interface RxHttpClient extends HttpClient {
 
     @Override
     default <I, O> Flowable<HttpResponse<O>> exchange(HttpRequest<I> request, Argument<O> bodyType) {
@@ -97,13 +100,26 @@ public interface Rx2HttpClient extends HttpClient {
     }
 
     /**
-     * Create a new {@link HttpClient}. Note that this method should only be used outside of the context of an application. Within Micronaut use
-     * {@link javax.inject.Inject} to inject a client instead
+     * Create a new {@link HttpClient}. Note that this method should only be used outside of the context of a
+     * Micronaut application. Within Micronaut use {@link jakarta.inject.Inject} to inject a client instead.
      *
      * @param url The base URL
      * @return The client
      */
-    static Rx2HttpClient create(@Nullable URL url) {
-        return Rx2HttpClientConfiguration.createClient(url);
+    static RxHttpClient create(@Nullable URL url) {
+        return new BridgedRxHttpClient(HttpClient.createStreamingClient(url));
+    }
+
+    /**
+     * Create a new {@link HttpClient} with the specified configuration. Note that this method should only be used
+     * outside of the context of an application. Within Micronaut use {@link jakarta.inject.Inject} to inject a client instead
+     *
+     * @param url The base URL
+     * @param configuration the client configuration
+     * @return The client
+     * @since 2.2.0
+     */
+    static RxHttpClient create(@Nullable URL url, HttpClientConfiguration configuration) {
+        return new BridgedRxHttpClient(HttpClient.createStreamingClient(url, configuration));
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2021 original authors
+ * Copyright 2017-2020 original authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +18,9 @@ package io.micronaut.rxjava2.http.client;
 import io.micronaut.core.io.buffer.ByteBuffer;
 import io.micronaut.core.type.Argument;
 import io.micronaut.http.HttpRequest;
+import io.micronaut.http.client.sse.SseClient;
 import io.micronaut.http.sse.Event;
 import io.reactivex.Flowable;
-import io.micronaut.http.client.sse.SseClient;
 
 /**
  * Extended version of {@link SseClient} for RxJava 2.x.
@@ -28,7 +28,7 @@ import io.micronaut.http.client.sse.SseClient;
  * @author Graeme Rocher
  * @since 1.0
  */
-public interface Rx2SseClient extends SseClient {
+public interface RxSseClient extends SseClient {
 
     @Override
     <I> Flowable<Event<ByteBuffer<?>>> eventStream(HttpRequest<I> request);

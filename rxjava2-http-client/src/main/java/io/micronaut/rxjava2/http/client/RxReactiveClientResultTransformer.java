@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2021 original authors
+ * Copyright 2017-2020 original authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import io.micronaut.http.client.ReactiveClientResultTransformer;
 import io.micronaut.http.client.exceptions.HttpClientResponseException;
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
-import javax.inject.Singleton;
+import jakarta.inject.Singleton;
 
 /**
  * Adds custom support for {@link Maybe} to handle NOT_FOUND results.
@@ -35,11 +35,11 @@ import javax.inject.Singleton;
 @Requires(classes = Flowable.class)
 @Internal
 @Indexed(ReactiveClientResultTransformer.class)
-public class RxJava2ClientResultTransformer implements ReactiveClientResultTransformer {
+public class RxReactiveClientResultTransformer implements ReactiveClientResultTransformer {
 
     @Override
     public Object transform(
-            Object publisherResult) {
+        Object publisherResult) {
         if (publisherResult instanceof Maybe) {
             Maybe<?> maybe = (Maybe) publisherResult;
             // add 404 handling for maybe
@@ -57,4 +57,3 @@ public class RxJava2ClientResultTransformer implements ReactiveClientResultTrans
         return publisherResult;
     }
 }
-

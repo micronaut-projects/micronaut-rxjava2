@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2021 original authors
+ * Copyright 2017-2020 original authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 /**
- * RxJava 2 classes related to instrumentation.
+ * RxJava 2 HTTP Client related classes.
  *
- * @author Sergio del Amo
- * @since 3.0.0
+ * @author graemerocher
+ * @since 1.0
  */
-package io.micronaut.rxjava2.instrument;
+package io.micronaut.rxjava2.http.client;
 

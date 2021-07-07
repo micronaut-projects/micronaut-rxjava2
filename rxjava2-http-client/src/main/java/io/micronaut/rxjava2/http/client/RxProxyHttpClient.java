@@ -1,5 +1,5 @@
 /*
- * Copyright 2017-2021 original authors
+ * Copyright 2017-2020 original authors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,11 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/**
- * RxJava 2 classes related to instrumentation.
- *
- * @author Sergio del Amo
- * @since 3.0.0
- */
-package io.micronaut.rxjava2.instrument;
+package io.micronaut.rxjava2.http.client;
 
+import io.micronaut.http.HttpRequest;
+import io.micronaut.http.MutableHttpResponse;
+import io.micronaut.http.client.ProxyHttpClient;
+import io.reactivex.Flowable;
+
+/**
+ * Extended version of {@link ProxyHttpClient} for RxJava 2.
+ *
+ * @author graemerocher
+ * @since 2.0.0
+ */
+public interface RxProxyHttpClient extends ProxyHttpClient {
+    @Override
+    Flowable<MutableHttpResponse<?>> proxy(HttpRequest<?> request);
+}
