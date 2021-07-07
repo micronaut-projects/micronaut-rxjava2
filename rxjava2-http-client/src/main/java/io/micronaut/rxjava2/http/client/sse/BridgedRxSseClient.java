@@ -19,14 +19,9 @@ import io.micronaut.core.annotation.Internal;
 import io.micronaut.core.io.buffer.ByteBuffer;
 import io.micronaut.core.type.Argument;
 import io.micronaut.http.HttpRequest;
-import io.micronaut.http.client.HttpClient;
 import io.micronaut.http.client.sse.SseClient;
 import io.micronaut.http.sse.Event;
 import io.reactivex.Flowable;
-
-import java.io.Closeable;
-import java.io.IOException;
-import java.net.URL;
 
 /**
  * RxJava 2 bridge for the Server side events HTTP client.

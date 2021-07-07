@@ -21,16 +21,13 @@ import io.micronaut.core.type.Argument;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.client.BlockingHttpClient;
-import io.micronaut.http.client.HttpClient;
 import io.micronaut.http.client.StreamingHttpClient;
 import io.reactivex.Flowable;
 import org.reactivestreams.Publisher;
-
-import java.net.URL;
 import java.util.Map;
 
 /**
- * Internal bridge for the {@link HttpClient} and {@link StreamingHttpClient}.
+ * Internal bridge for the {@link RxHttpClient} and {@link RxStreamingHttpClient}.
  *
  * @author Sergio del Amo
  * @since 3.0.0
@@ -137,6 +134,4 @@ class BridgedRxHttpClient implements RxStreamingHttpClient {
     public <I, O> Flowable<O> jsonStream(HttpRequest<I> request, Class<O> type) {
         return Flowable.fromPublisher(streamingHttpClient.jsonStream(request, type));
     }
-
-
 }

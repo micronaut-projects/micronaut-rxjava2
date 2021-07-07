@@ -17,11 +17,8 @@ package io.micronaut.rxjava2.http.client.websockets;
 
 import io.micronaut.core.annotation.Internal;
 import io.micronaut.http.MutableHttpRequest;
-import io.micronaut.http.client.HttpClient;
 import io.micronaut.websocket.WebSocketClient;
 import io.reactivex.Flowable;
-
-import java.net.URL;
 import java.util.Map;
 
 /**

@@ -19,7 +19,6 @@ import io.micronaut.core.annotation.Internal;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.MutableHttpResponse;
 import io.micronaut.http.client.ProxyHttpClient;
-import io.micronaut.rxjava2.http.client.proxy.RxProxyHttpClient;
 import io.reactivex.Flowable;
 
 

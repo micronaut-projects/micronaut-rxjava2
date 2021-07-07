@@ -34,13 +34,13 @@ import io.micronaut.inject.InjectionPoint;
 @Factory
 public class RxSseClientFactory {
 
-    private final ReactiveHttpClientRegistry<?, ?, ?, ?> clientRegistry;
+    private final ReactiveHttpClientRegistry<?, ?, ?, ?, ?> clientRegistry;
 
     /**
      * Default constructor.
      * @param clientRegistry The client registry
      */
-    public RxSseClientFactory(ReactiveHttpClientRegistry<?, ?, ?, ?> clientRegistry) {
+    public RxSseClientFactory(ReactiveHttpClientRegistry<?, ?, ?, ?, ?> clientRegistry) {
         this.clientRegistry = clientRegistry;
     }
 
