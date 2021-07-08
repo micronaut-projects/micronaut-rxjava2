@@ -23,7 +23,7 @@ import io.micronaut.context.annotation.Secondary;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.http.client.HttpClientConfiguration;
 import io.micronaut.http.client.LoadBalancer;
-import io.micronaut.http.client.ReactiveHttpClientRegistry;
+import io.micronaut.http.client.ProxyHttpClientRegistry;
 import io.micronaut.inject.InjectionPoint;
 
 /**
@@ -34,13 +34,13 @@ import io.micronaut.inject.InjectionPoint;
 @Factory
 public class RxProxyHttpClientFactory {
 
-    private final ReactiveHttpClientRegistry<?, ?, ?, ?, ?> clientRegistry;
+    private final ProxyHttpClientRegistry<?> clientRegistry;
 
     /**
      * Default constructor.
      * @param clientRegistry The client registry
      */
-    public RxProxyHttpClientFactory(ReactiveHttpClientRegistry<?, ?, ?, ?, ?> clientRegistry) {
+    public RxProxyHttpClientFactory(ProxyHttpClientRegistry<?> clientRegistry) {
         this.clientRegistry = clientRegistry;
     }
 
@@ -58,7 +58,7 @@ public class RxProxyHttpClientFactory {
                                     @Parameter @Nullable LoadBalancer loadBalancer,
                                     @Parameter @Nullable HttpClientConfiguration configuration,
                                     BeanContext beanContext) {
-        return new BridgeProxyHttpClient(clientRegistry.resolveProxyClient(injectionPoint, loadBalancer, configuration, beanContext));
+        return new BridgeProxyHttpClient(clientRegistry.resolveProxyHttpClient(injectionPoint, loadBalancer, configuration, beanContext));
     }
 }
 

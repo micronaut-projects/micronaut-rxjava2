@@ -23,7 +23,7 @@ import io.micronaut.context.annotation.Secondary;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.http.client.HttpClientConfiguration;
 import io.micronaut.http.client.LoadBalancer;
-import io.micronaut.http.client.ReactiveHttpClientRegistry;
+import io.micronaut.http.client.sse.SseClientRegistry;
 import io.micronaut.inject.InjectionPoint;
 
 /**
@@ -34,13 +34,13 @@ import io.micronaut.inject.InjectionPoint;
 @Factory
 public class RxSseClientFactory {
 
-    private final ReactiveHttpClientRegistry<?, ?, ?, ?, ?> clientRegistry;
+    private final SseClientRegistry<?> clientRegistry;
 
     /**
      * Default constructor.
      * @param clientRegistry The client registry
      */
-    public RxSseClientFactory(ReactiveHttpClientRegistry<?, ?, ?, ?, ?> clientRegistry) {
+    public RxSseClientFactory(SseClientRegistry<?> clientRegistry) {
         this.clientRegistry = clientRegistry;
     }
 

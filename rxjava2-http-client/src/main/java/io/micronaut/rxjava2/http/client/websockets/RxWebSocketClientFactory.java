@@ -23,7 +23,7 @@ import io.micronaut.context.annotation.Secondary;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.http.client.HttpClientConfiguration;
 import io.micronaut.http.client.LoadBalancer;
-import io.micronaut.http.client.ReactiveHttpClientRegistry;
+import io.micronaut.http.client.WebSocketClientRegistry;
 import io.micronaut.inject.InjectionPoint;
 
 /**
@@ -34,13 +34,13 @@ import io.micronaut.inject.InjectionPoint;
  */
 @Factory
 public class RxWebSocketClientFactory {
-    private final ReactiveHttpClientRegistry<?, ?, ?, ?, ?> clientRegistry;
+    private final WebSocketClientRegistry<?> clientRegistry;
 
     /**
      * Default constructor.
      * @param clientRegistry The client registry
      */
-    public RxWebSocketClientFactory(ReactiveHttpClientRegistry<?, ?, ?, ?, ?> clientRegistry) {
+    public RxWebSocketClientFactory(WebSocketClientRegistry<?> clientRegistry) {
         this.clientRegistry = clientRegistry;
     }
 
