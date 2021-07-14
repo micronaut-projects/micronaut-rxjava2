@@ -1,2 +1,6 @@
 io.micronaut.rxjava2.converters
 io.micronaut.rxjava2.http.client
+io.micronaut.rxjava2.http.client.proxy
+io.micronaut.rxjava2.http.client.sse
+io.micronaut.rxjava2.http.client.websockets
+io.micronaut.rxjava2.server.upload.binders
