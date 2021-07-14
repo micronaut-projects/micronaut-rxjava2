@@ -1,0 +1,7 @@
+The following dependency includes:
+
+dependency:io.micronaut.rxjava2:micronaut-rxjava2[scope="compile", version="{version}"]
+
+* Converters for RxJava 2 types so that RxJava 2 types can be used in controllers and clients
+
+* Instrumentation for RxJava 2 types so that tracing works with RxJava 2 types
