@@ -1,8 +1,2 @@
-Adds support for RxJava 2 to a Micronaut application. The following integrations are included:
-
-* Converters for RxJava 2 types so that RxJava 3 types can be used in controllers and clients
-
-* Instrumentation for RxJava 2 types so that tracing works with RxJava 2 types
-
-* A version of the Http client that supports RxJava 2
+Adds support for RxJava 2 to a Micronaut application.
 

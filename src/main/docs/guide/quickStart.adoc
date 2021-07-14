@@ -3,18 +3,3 @@ Add the following dependency to your Micronaut application:
 dependency:io.micronaut.rxjava2:micronaut-rxjava2[scope="compile", version="{version}"]
 
 === RxJava2 HTTP Client
-
-To use the HTTP client add the following dependency:
-
-dependency:io.micronaut.rxjava2:micronaut-rxjava2-http-client[scope="compile", version="{version}"]
-
-To use the RxJava 2 variation of the Micronaut HTTP client inject the api:rxjava3.http.client.Rx2HttpClient[] interface (or one of the other variants). For example:
-
-[source,java]
-----
-import io.micronaut.rxjava3.http.client.*;
-
-@Inject Rx2HttpClient httpClient; // regular client
-@Inject Rx2SseClient sseClient; // server sent events
-@Inject Rx2StreamingHttpClient streamingClient; // streaming
-----
