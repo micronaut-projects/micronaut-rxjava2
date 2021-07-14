@@ -23,7 +23,7 @@ import io.micronaut.context.annotation.Secondary;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.http.client.HttpClientConfiguration;
 import io.micronaut.http.client.LoadBalancer;
-import io.micronaut.http.client.WebSocketClientRegistry;
+import io.micronaut.websocket.WebSocketClientRegistry;
 import io.micronaut.inject.InjectionPoint;
 
 /**
