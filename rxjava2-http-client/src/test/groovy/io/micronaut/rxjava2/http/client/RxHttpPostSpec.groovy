@@ -159,7 +159,7 @@ class RxHttpPostSpec extends Specification {
 
         then:
         def e = thrown(HttpClientResponseException)
-        e.message.contains('Cannot construct instance of `io.micronaut.rxjava2.http.client.Movie`')
+        e.response.getBody(Map).get()._embedded.errors[0].message.contains('Cannot construct instance of `io.micronaut.rxjava2.http.client.Movie`')
     }
 
     void "test reactive post error handling"() {

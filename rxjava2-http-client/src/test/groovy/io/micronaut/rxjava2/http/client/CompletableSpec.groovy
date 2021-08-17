@@ -24,12 +24,11 @@ class CompletableSpec extends Specification {
         when:
         MyGetClient client = this.myGetClient
         def returnsNull = client.completable().blockingGet()
-        def ex = client.completableError().blockingGet()
+        HttpClientResponseException ex = client.completableError().blockingGet()
 
         then:
         returnsNull == null
-        ex instanceof HttpClientResponseException
-        ex.message.contains("completable error")
+        ex.response.getBody(Map).get()._embedded.errors[0].message.contains("completable error")
     }
 
     //@Requires(property = 'spec.name', value = 'CompletableSpec')
