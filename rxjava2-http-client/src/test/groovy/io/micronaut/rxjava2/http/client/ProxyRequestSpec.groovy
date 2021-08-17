@@ -51,7 +51,7 @@ class ProxyRequestSpec extends Specification {
         then:
         HttpClientResponseException e = thrown()
         e.response.header('X-My-Response-Header') == 'YYY'
-        e.message == "Internal Server Error: Bad things happened"
+        e.response.getBody(Map).get()._embedded.errors[0].message == "Internal Server Error: Bad things happened"
 
         when:"A GET request with a 404"
         client.exchange("/proxy/notThere", String).blockingFirst()
@@ -59,7 +59,7 @@ class ProxyRequestSpec extends Specification {
         then:
         e = thrown(HttpClientResponseException)
         e.response.header('X-My-Response-Header') == 'YYY'
-        e.message == "Page Not Found"
+        e.response.getBody(Map).get()._embedded.errors[0].message == "Page Not Found"
     }
 
     @Requires(property = 'spec.name', value = 'ProxyRequestSpec')
