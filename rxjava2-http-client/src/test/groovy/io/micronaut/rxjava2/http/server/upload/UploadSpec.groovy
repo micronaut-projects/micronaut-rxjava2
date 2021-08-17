@@ -109,8 +109,8 @@ class UploadSpec extends AbstractMicronautSpec {
         def json = new JsonSlurper().parseText(e.response.getBody().get())
 
         then:
-        json.message.contains("Failed to convert argument [data]")
-        json.path == "/data"
+        json._embedded.errors[0].message.contains("Failed to convert argument [data]")
+        json._embedded.errors[0].path == "/data"
 
     }
 
@@ -159,7 +159,7 @@ class UploadSpec extends AbstractMicronautSpec {
         def json = new JsonSlurper().parseText(e.response.getBody().get())
 
         then:
-        json.message == "Required argument [String data] not specified"
+        json._embedded.errors[0].message == "Required argument [String data] not specified"
     }
 
     void "test file upload with wrong argument name for simple part"() {
@@ -186,7 +186,7 @@ class UploadSpec extends AbstractMicronautSpec {
         def json = new JsonSlurper().parseText(e.response.getBody().get())
 
         then:
-        json.message == "Required argument [String title] not specified"
+        json._embedded.errors[0].message == "Required argument [String title] not specified"
     }
 
     void "test file upload with missing argument for simple part"() {
@@ -212,7 +212,7 @@ class UploadSpec extends AbstractMicronautSpec {
         def json = new JsonSlurper().parseText(e.response.getBody().get())
 
         then:
-        json.message == "Required argument [String title] not specified"
+        json._embedded.errors[0].message == "Required argument [String title] not specified"
     }
 
     void "test file upload with missing argument for file part"() {
@@ -238,7 +238,7 @@ class UploadSpec extends AbstractMicronautSpec {
         def json = new JsonSlurper().parseText(e.response.getBody().get())
 
         then:
-        json.message == "Required argument [String data] not specified"
+        json._embedded.errors[0].message == "Required argument [String data] not specified"
     }
 
     void "test file upload to byte array"() {
@@ -287,7 +287,7 @@ class UploadSpec extends AbstractMicronautSpec {
         def json = new JsonSlurper().parseText(e.response.getBody().get())
 
         then:
-        json.message.contains("exceeds the maximum allowed content length [1024]")
+        json._embedded.errors[0].message.contains("exceeds the maximum allowed content length [1024]")
     }
 
     void "test upload CompletedFileUpload object"() {
@@ -333,6 +333,6 @@ class UploadSpec extends AbstractMicronautSpec {
         then:
         def ex = thrown(HttpClientResponseException)
         ex.response.status() == HttpStatus.INTERNAL_SERVER_ERROR
-        ex.response.getBody(Map).get().message == "Internal Server Error: The bytes have already been released"
+        ex.response.getBody(Map).get()._embedded.errors[0].message == "Internal Server Error: The bytes have already been released"
     }
 }
