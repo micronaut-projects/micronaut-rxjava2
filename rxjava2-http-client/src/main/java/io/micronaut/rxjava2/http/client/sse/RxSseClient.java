@@ -15,12 +15,17 @@
  */
 package io.micronaut.rxjava2.http.client.sse;
 
+import io.micronaut.core.annotation.NonNull;
+import io.micronaut.core.annotation.Nullable;
 import io.micronaut.core.io.buffer.ByteBuffer;
 import io.micronaut.core.type.Argument;
 import io.micronaut.http.HttpRequest;
+import io.micronaut.http.client.HttpClientConfiguration;
 import io.micronaut.http.client.sse.SseClient;
 import io.micronaut.http.sse.Event;
 import io.reactivex.Flowable;
+
+import java.net.URL;
 
 /**
  * Extended version of {@link SseClient} for RxJava 2.x.
@@ -31,23 +36,51 @@ import io.reactivex.Flowable;
 public interface RxSseClient extends SseClient {
 
     @Override
-    <I> Flowable<Event<ByteBuffer<?>>> eventStream(HttpRequest<I> request);
+    <I> Flowable<Event<ByteBuffer<?>>> eventStream(@NonNull HttpRequest<I> request);
 
     @Override
-    <I, B> Flowable<Event<B>> eventStream(HttpRequest<I> request, Argument<B> eventType);
+    <I, B> Flowable<Event<B>> eventStream(@NonNull HttpRequest<I> request, @NonNull Argument<B> eventType);
 
     @Override
-    default <I, B> Flowable<Event<B>> eventStream(HttpRequest<I> request, Class<B> eventType) {
+    default <I, B> Flowable<Event<B>> eventStream(@NonNull HttpRequest<I> request, @NonNull Class<B> eventType) {
         return (Flowable<Event<B>>) SseClient.super.eventStream(request, eventType);
     }
 
     @Override
-    default <B> Flowable<Event<B>> eventStream(String uri, Class<B> eventType) {
+    default <B> Flowable<Event<B>> eventStream(@NonNull String uri, @NonNull Class<B> eventType) {
         return (Flowable<Event<B>>) SseClient.super.eventStream(uri, eventType);
     }
 
     @Override
-    default <B> Flowable<Event<B>> eventStream(String uri, Argument<B> eventType) {
+    default <B> Flowable<Event<B>> eventStream(@NonNull String uri, @NonNull Argument<B> eventType) {
         return (Flowable<Event<B>>) SseClient.super.eventStream(uri, eventType);
+    }
+
+    /**
+     * Create a new {@link RxSseClient}.
+     * Note that this method should only be used outside of the context of a Micronaut application.
+     * The returned {@link RxSseClient} is not subject to dependency injection.
+     * The creator is responsible for closing the client to avoid leaking connections.
+     * Within a Micronaut application use {@link jakarta.inject.Inject} to inject a client instead.
+     *
+     * @param url The base URL
+     * @return The client
+     * @since 1.1.0
+     */
+    static RxSseClient create(@Nullable URL url) {
+        return new BridgedRxSseClient(SseClient.create(url));
+    }
+
+    /**
+     * Create a new {@link RxSseClient} with the specified configuration. Note that this method should only be used
+     * outside of the context of an application. Within Micronaut use {@link jakarta.inject.Inject} to inject a client instead
+     *
+     * @param url The base URL
+     * @param configuration the client configuration
+     * @return The client
+     * @since 1.1.0
+     */
+    static RxSseClient create(@Nullable URL url, @NonNull HttpClientConfiguration configuration) {
+        return new BridgedRxSseClient(SseClient.create(url, configuration));
     }
 }

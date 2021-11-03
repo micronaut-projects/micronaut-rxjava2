@@ -58,7 +58,7 @@ public class RxProxyHttpClientFactory {
                                     @Parameter @Nullable LoadBalancer loadBalancer,
                                     @Parameter @Nullable HttpClientConfiguration configuration,
                                     BeanContext beanContext) {
-        return new BridgeProxyHttpClient(clientRegistry.resolveProxyHttpClient(injectionPoint, loadBalancer, configuration, beanContext));
+        return new BridgedProxyRxHttpClient(clientRegistry.resolveProxyHttpClient(injectionPoint, loadBalancer, configuration, beanContext));
     }
 }
 
