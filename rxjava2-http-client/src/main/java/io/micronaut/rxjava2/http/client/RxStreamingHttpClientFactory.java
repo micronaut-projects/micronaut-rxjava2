@@ -60,6 +60,6 @@ public class RxStreamingHttpClientFactory {
                                                         @Parameter @Nullable LoadBalancer loadBalancer,
                                                         @Parameter @Nullable HttpClientConfiguration configuration,
                                                         BeanContext beanContext) {
-        return new BridgedRxHttpClient(clientRegistry.resolveStreamingHttpClient(injectionPoint, loadBalancer, configuration, beanContext));
+        return new BridgedRxStreamingHttpClient(clientRegistry.resolveStreamingHttpClient(injectionPoint, loadBalancer, configuration, beanContext));
     }
 }

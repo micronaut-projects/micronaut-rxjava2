@@ -16,6 +16,7 @@
 package io.micronaut.rxjava2.http.client.proxy;
 
 import io.micronaut.core.annotation.Internal;
+import io.micronaut.core.annotation.NonNull;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.MutableHttpResponse;
 import io.micronaut.http.client.ProxyHttpClient;
@@ -29,16 +30,16 @@ import io.reactivex.Flowable;
  * @since 3.0.0
  */
 @Internal
-class BridgeProxyHttpClient implements RxProxyHttpClient {
+class BridgedProxyRxHttpClient implements RxProxyHttpClient {
 
     private final ProxyHttpClient proxyHttpClient;
 
-    BridgeProxyHttpClient(ProxyHttpClient proxyHttpClient) {
+    BridgedProxyRxHttpClient(ProxyHttpClient proxyHttpClient) {
         this.proxyHttpClient = proxyHttpClient;
     }
 
     @Override
-    public Flowable<MutableHttpResponse<?>> proxy(HttpRequest<?> request) {
+    public Flowable<MutableHttpResponse<?>> proxy(@NonNull HttpRequest<?> request) {
         return Flowable.fromPublisher(proxyHttpClient.proxy(request));
     }
 }

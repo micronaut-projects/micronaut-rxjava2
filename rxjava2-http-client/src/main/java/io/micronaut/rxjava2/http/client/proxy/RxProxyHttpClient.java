@@ -15,10 +15,15 @@
  */
 package io.micronaut.rxjava2.http.client.proxy;
 
+import io.micronaut.core.annotation.NonNull;
+import io.micronaut.core.annotation.Nullable;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.MutableHttpResponse;
+import io.micronaut.http.client.HttpClientConfiguration;
 import io.micronaut.http.client.ProxyHttpClient;
 import io.reactivex.Flowable;
+
+import java.net.URL;
 
 /**
  * Extended version of {@link ProxyHttpClient} for RxJava 2.
@@ -27,6 +32,35 @@ import io.reactivex.Flowable;
  * @since 2.0.0
  */
 public interface RxProxyHttpClient extends ProxyHttpClient {
+
     @Override
-    Flowable<MutableHttpResponse<?>> proxy(HttpRequest<?> request);
+    Flowable<MutableHttpResponse<?>> proxy(@NonNull HttpRequest<?> request);
+
+    /**
+     * Create a new {@link RxProxyHttpClient}.
+     * Note that this method should only be used outside of the context of a Micronaut application.
+     * The returned {@link RxProxyHttpClient} is not subject to dependency injection.
+     * The creator is responsible for closing the client to avoid leaking connections.
+     * Within a Micronaut application use {@link jakarta.inject.Inject} to inject a client instead.
+     *
+     * @param url The base URL
+     * @return The client
+     * @since 2.1.0
+     */
+    static RxProxyHttpClient create(@Nullable URL url) {
+        return new BridgedProxyRxHttpClient(ProxyHttpClient.create(url));
+    }
+
+    /**
+     * Create a new {@link ProxyHttpClient} with the specified configuration. Note that this method should only be used
+     * outside of the context of an application. Within Micronaut use {@link jakarta.inject.Inject} to inject a client instead
+     *
+     * @param url The base URL
+     * @param configuration the client configuration
+     * @return The client
+     * @since 2.1.0
+     */
+    static RxProxyHttpClient create(@Nullable URL url, @NonNull HttpClientConfiguration configuration) {
+        return new BridgedProxyRxHttpClient(ProxyHttpClient.create(url, configuration));
+    }
 }
