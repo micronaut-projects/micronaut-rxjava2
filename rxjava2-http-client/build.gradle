@@ -1,12 +1,12 @@
+plugins {
+    id "io.micronaut.build.internal.module"
+}
 dependencies {
-    annotationProcessor "io.micronaut:micronaut-inject-java:$micronautVersion"
     annotationProcessor "io.micronaut:micronaut-graal:$micronautVersion"
-
     api project(":rxjava2")
     api "io.micronaut:micronaut-http-client"
-
-
     testAnnotationProcessor "io.micronaut:micronaut-validation"
+    testAnnotationProcessor "io.micronaut:micronaut-inject-java"
     testImplementation "io.micronaut:micronaut-validation"
     testImplementation 'org.codehaus.groovy:groovy-json'
     testImplementation project(":rxjava2-http-server-netty")
