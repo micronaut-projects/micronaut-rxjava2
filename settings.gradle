@@ -9,7 +9,7 @@ plugins {
     id 'io.micronaut.build.shared.settings' version '5.1.2'
 }
 
-rootProject.name = 'rxjava2'
+rootProject.name = 'rxjava2-parent'
 
 include 'rxjava2'
 include 'rxjava2-http-client'
