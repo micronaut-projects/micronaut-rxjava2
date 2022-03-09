@@ -109,4 +109,22 @@ class BridgedRxHttpClient implements RxHttpClient {
         return httpClient.isRunning();
     }
 
+    @Override
+    public void close() {
+        httpClient.close();
+    }
+
+    @Override
+    @NonNull
+    public HttpClient start() {
+        httpClient.start();
+        return this;
+    }
+
+    @Override
+    @NonNull
+    public HttpClient stop() {
+        httpClient.stop();
+        return this;
+    }
 }
