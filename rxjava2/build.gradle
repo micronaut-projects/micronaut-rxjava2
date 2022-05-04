@@ -2,8 +2,8 @@ plugins {
     id "io.micronaut.build.internal.module"
 }
 dependencies {
-    annotationProcessor "io.micronaut:micronaut-graal"
+    annotationProcessor(libs.micronaut.graal)
 
-    api "io.micronaut:micronaut-runtime"
-    api "io.reactivex.rxjava2:rxjava:$rxJava2Version"
+    api(libs.micronaut.runtime)
+    api(libs.rxjava2)
 }

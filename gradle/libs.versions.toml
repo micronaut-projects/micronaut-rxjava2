@@ -1,0 +1,15 @@
+[versions]
+rxjava2 = "2.2.21"
+
+
+[libraries]
+# Micronaut
+micronaut-graal = { module = "io.micronaut:micronaut-graal" }
+micronaut-http-client = { module = "io.micronaut:micronaut-http-client" }
+micronaut-http-server-netty = { module = "io.micronaut:micronaut-http-server-netty" }
+micronaut-inject-java = { module = "io.micronaut:micronaut-inject-java" }
+micronaut-runtime = { module = "io.micronaut:micronaut-runtime" }
+micronaut-validation = { module = "io.micronaut:micronaut-validation" }
+
+groovy-json = { module = "org.codehaus.groovy:groovy-json" }
+rxjava2 = { module = "io.reactivex.rxjava2:rxjava", version.ref = "rxjava2" }

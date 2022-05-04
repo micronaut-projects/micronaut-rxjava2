@@ -3,7 +3,7 @@ plugins {
 }
 
 dependencies {
-    api "io.micronaut:micronaut-runtime"
-    api "io.micronaut:micronaut-http-server-netty"
-    api "io.reactivex.rxjava2:rxjava:$rxJava2Version"
+    api(libs.micronaut.runtime)
+    api(libs.micronaut.http.server.netty)
+    api(libs.rxjava2)
 }
