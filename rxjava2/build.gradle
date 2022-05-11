@@ -1,9 +1,10 @@
 plugins {
     id "io.micronaut.build.internal.module"
 }
+
 dependencies {
     annotationProcessor(libs.micronaut.graal)
 
     api(libs.micronaut.runtime)
-    api(libs.rxjava2)
+    api(libs.managed.rxjava2)
 }

@@ -1,8 +1,10 @@
 [versions]
-rxjava2 = "2.2.21"
+managed-rxjava2 = "2.2.21"
 
 
 [libraries]
+managed-rxjava2 = { module = "io.reactivex.rxjava2:rxjava", version.ref = "managed-rxjava2" }
+
 # Micronaut
 micronaut-graal = { module = "io.micronaut:micronaut-graal" }
 micronaut-http-client = { module = "io.micronaut:micronaut-http-client" }
@@ -12,4 +14,3 @@ micronaut-runtime = { module = "io.micronaut:micronaut-runtime" }
 micronaut-validation = { module = "io.micronaut:micronaut-validation" }
 
 groovy-json = { module = "org.codehaus.groovy:groovy-json" }
-rxjava2 = { module = "io.reactivex.rxjava2:rxjava", version.ref = "rxjava2" }
