@@ -5,5 +5,5 @@ dependencies {
     annotationProcessor "io.micronaut:micronaut-graal"
 
     api "io.micronaut:micronaut-runtime"
-    api "io.reactivex.rxjava2:rxjava:$rxJava2Version"
+    api libs.managed.rxjava2
 }

@@ -1,0 +1,5 @@
+[versions]
+managed-rxjava2 = "2.2.21"
+
+[libraries]
+managed-rxjava2 = { module = "io.reactivex.rxjava2:rxjava", version.ref = "managed-rxjava2" }
