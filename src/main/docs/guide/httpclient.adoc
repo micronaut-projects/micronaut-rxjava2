@@ -1,6 +1,6 @@
 To use the HTTP client add the following dependency:
 
-dependency:io.micronaut.rxjava2:micronaut-rxjava2-http-client[scope="compile", version="{version}"]
+dependency:io.micronaut.rxjava2:micronaut-rxjava2-http-client[scope="compile"]
 
 To use the RxJava 2 variation of the Micronaut HTTP client inject the api:rxjava2.http.client.RxHttpClient[] interface (or one of the other variants). For example:
 

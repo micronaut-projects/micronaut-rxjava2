@@ -1,5 +1,6 @@
 introduction: Introduction
 releaseHistory: Release History
+quickStart: Quick Start
 convertersandinstrumentation: Converters and Instrumentation
 httpclient: RxJava2 HTTP Client
 bodybinders: Netty Body Binders

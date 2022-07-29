@@ -1,5 +1,3 @@
 Add the following dependency to your Micronaut application:
 
-dependency:io.micronaut.rxjava2:micronaut-rxjava2[scope="compile", version="{version}"]
-
-=== RxJava2 HTTP Client
+dependency:io.micronaut.rxjava2:micronaut-rxjava2[scope="compile"]
