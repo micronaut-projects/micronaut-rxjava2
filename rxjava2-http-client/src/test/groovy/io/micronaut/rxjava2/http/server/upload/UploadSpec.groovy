@@ -322,7 +322,7 @@ class UploadSpec extends AbstractMicronautSpec {
                 .build()
 
         when:
-        Flowable.fromPublisher(client.exchange(
+        def response = Flowable.fromPublisher(client.exchange(
                 HttpRequest.POST("/upload/receive-multipart-body-as-single", requestBody)
                         .contentType(MediaType.MULTIPART_FORM_DATA_TYPE)
                         .accept(MediaType.TEXT_PLAIN_TYPE),
@@ -331,8 +331,7 @@ class UploadSpec extends AbstractMicronautSpec {
         )).blockingFirst()
 
         then:
-        def ex = thrown(HttpClientResponseException)
-        ex.response.status() == HttpStatus.INTERNAL_SERVER_ERROR
-        ex.response.getBody(Map).get()._embedded.errors[0].message == "Internal Server Error: The bytes have already been released"
+        // this used to error prior to micronaut 3.5
+        response.body() == 'OK'
     }
 }
