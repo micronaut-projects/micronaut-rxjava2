@@ -15,3 +15,14 @@ include 'rxjava2'
 include 'rxjava2-bom'
 include 'rxjava2-http-client'
 include 'rxjava2-http-server-netty'
+
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+        maven { url "https://s01.oss.sonatype.org/content/repositories/snapshots/" }
+    }
+}
+
+micronautBuild {
+    importMicronautCatalog()
+}
