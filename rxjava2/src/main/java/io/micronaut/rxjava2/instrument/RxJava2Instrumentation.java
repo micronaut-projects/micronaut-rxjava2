@@ -37,8 +37,8 @@ import io.reactivex.plugins.RxJavaPlugins;
 import jakarta.inject.Singleton;
 import org.reactivestreams.Subscriber;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 
 /**
  * Provides a single point of entry for all instrumentations for RxJava 2.x.
