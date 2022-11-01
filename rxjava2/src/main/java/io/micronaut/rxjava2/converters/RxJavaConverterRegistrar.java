@@ -15,8 +15,6 @@
  */
 package io.micronaut.rxjava2.converters;
 
-import io.micronaut.context.annotation.BootstrapContextCompatible;
-import io.micronaut.context.annotation.Requires;
 import io.micronaut.core.convert.MutableConversionService;
 import io.micronaut.core.convert.TypeConverterRegistrar;
 import io.reactivex.BackpressureStrategy;
@@ -25,7 +23,6 @@ import io.reactivex.Flowable;
 import io.reactivex.Maybe;
 import io.reactivex.Observable;
 import io.reactivex.Single;
-import jakarta.inject.Singleton;
 import org.reactivestreams.Publisher;
 
 /**
@@ -34,9 +31,6 @@ import org.reactivestreams.Publisher;
  * @author graemerocher
  * @since 1.0
  */
-@Singleton
-@Requires(classes = Flowable.class)
-@BootstrapContextCompatible
 public class RxJavaConverterRegistrar implements TypeConverterRegistrar {
 
     @SuppressWarnings("unchecked")
