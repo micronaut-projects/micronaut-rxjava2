@@ -1,5 +1,7 @@
 [versions]
 managed-rxjava2 = "2.2.21"
+groovy = '4.0.6'
 
 [libraries]
 managed-rxjava2 = { module = "io.reactivex.rxjava2:rxjava", version.ref = "managed-rxjava2" }
+groovy-json = { module = "org.apache.groovy:groovy-json", version.ref = "groovy" }
