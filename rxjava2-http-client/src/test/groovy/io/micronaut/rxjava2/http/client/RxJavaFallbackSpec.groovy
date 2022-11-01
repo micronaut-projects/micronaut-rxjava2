@@ -20,6 +20,7 @@ import io.micronaut.context.annotation.Requires
 import io.micronaut.http.annotation.*
 import io.micronaut.http.client.annotation.Client
 import io.micronaut.retry.annotation.Fallback
+import io.micronaut.retry.annotation.Recoverable
 import io.micronaut.runtime.server.EmbeddedServer
 import io.reactivex.Flowable
 import io.reactivex.Maybe
@@ -99,6 +100,7 @@ class RxJavaFallbackSpec extends Specification{
     }
 
     @Requires(property = 'spec.name', value = 'RxJavaFallbackSpec')
+    @Recoverable(api = BookApi.class)
     @Client('/rxjava/fallback/books')
     static interface BookClient extends BookApi {
     }
