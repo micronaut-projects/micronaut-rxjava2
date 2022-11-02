@@ -5,6 +5,6 @@ plugins {
 dependencies {
     annotationProcessor mn.micronaut.graal
 
-    api mn.micronaut.retry
+    api mn.micronaut.context
     api libs.managed.rxjava2
 }
