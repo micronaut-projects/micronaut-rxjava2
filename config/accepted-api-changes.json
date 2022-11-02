@@ -2,36 +2,36 @@
   {
     "type": "io.micronaut.rxjava2.converters.$RxJavaConverterRegistrar$Definition$Reference",
     "member": "Field $ANNOTATION_METADATA",
-    "reason": "Provide a human readable reason for the change"
+    "reason": "In Micronaut Framework 4 is loaded via service loader"
   },
   {
     "type": "io.micronaut.rxjava2.converters.$RxJavaConverterRegistrar$Definition$Reference",
     "member": "Constructor io.micronaut.rxjava2.converters.$RxJavaConverterRegistrar$Definition$Reference()",
-    "reason": "Provide a human readable reason for the change"
+    "reason": "In Micronaut Framework 4 is loaded via service loader"
   },
   {
     "type": "io.micronaut.rxjava2.converters.$RxJavaConverterRegistrar$Definition$Reference",
     "member": "Implemented interface io.micronaut.core.annotation.AnnotationSource",
-    "reason": "Provide a human readable reason for the change"
+    "reason": "In Micronaut Framework 4 is loaded via service loader"
   },
   {
     "type": "io.micronaut.rxjava2.converters.$RxJavaConverterRegistrar$Definition$Reference",
     "member": "Implemented interface io.micronaut.inject.BeanContextConditional",
-    "reason": "Provide a human readable reason for the change"
+    "reason": "In Micronaut Framework 4 is loaded via service loader"
   },
   {
     "type": "io.micronaut.rxjava2.converters.$RxJavaConverterRegistrar$Definition$Reference",
     "member": "Implemented interface io.micronaut.core.annotation.AnnotationMetadataProvider",
-    "reason": "Provide a human readable reason for the change"
+    "reason": "In Micronaut Framework 4 is loaded via service loader"
   },
   {
     "type": "io.micronaut.rxjava2.converters.$RxJavaConverterRegistrar$Definition$Reference",
     "member": "Implemented interface io.micronaut.inject.BeanType",
-    "reason": "Provide a human readable reason for the change"
+    "reason": "In Micronaut Framework 4 is loaded via service loader"
   },
   {
     "type": "io.micronaut.rxjava2.converters.$RxJavaConverterRegistrar$Definition$Reference",
     "member": "Implemented interface io.micronaut.inject.BeanDefinitionReference",
-    "reason": "Provide a human readable reason for the change"
+    "reason": "In Micronaut Framework 4 is loaded via service loader"
   }
 ]
