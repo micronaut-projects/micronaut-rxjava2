@@ -3,8 +3,8 @@ plugins {
 }
 
 dependencies {
-    annotationProcessor "io.micronaut:micronaut-graal"
+    annotationProcessor mn.micronaut.graal
 
-    api "io.micronaut:micronaut-runtime"
+    api mn.micronaut.retry
     api libs.managed.rxjava2
 }

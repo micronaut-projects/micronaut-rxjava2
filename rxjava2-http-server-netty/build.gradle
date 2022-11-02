@@ -3,7 +3,6 @@ plugins {
 }
 
 dependencies {
-    api "io.micronaut:micronaut-runtime"
-    api "io.micronaut:micronaut-http-server-netty"
+    api mn.micronaut.http.server.netty
     api libs.managed.rxjava2
 }

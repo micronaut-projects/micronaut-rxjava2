@@ -3,15 +3,16 @@ plugins {
 }
 
 dependencies {
-    annotationProcessor "io.micronaut:micronaut-graal"
+    annotationProcessor mn.micronaut.graal
 
     api project(":rxjava2")
-    api "io.micronaut:micronaut-http-client"
+    api mn.micronaut.http.client
 
-    testAnnotationProcessor "io.micronaut:micronaut-validation"
-    testAnnotationProcessor "io.micronaut:micronaut-inject-java"
+    testAnnotationProcessor mn.micronaut.validation
+    testAnnotationProcessor mn.micronaut.inject.java
 
-    testImplementation "io.micronaut:micronaut-validation"
-    testImplementation 'org.codehaus.groovy:groovy-json'
+    testImplementation mn.micronaut.validation
+    testImplementation mn.micronaut.jackson.databind
+    testImplementation libs.groovy.json
     testImplementation project(":rxjava2-http-server-netty")
 }

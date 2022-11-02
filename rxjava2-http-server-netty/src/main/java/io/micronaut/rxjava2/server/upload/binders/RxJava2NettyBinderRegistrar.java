@@ -30,7 +30,7 @@ import jakarta.inject.Singleton;
 @Internal
 @Requires(classes = Flowable.class)
 class RxJava2NettyBinderRegistrar implements BeanCreatedEventListener<RequestBinderRegistry> {
-    private final ConversionService<?> conversionService;
+    private final ConversionService conversionService;
     private final HttpContentProcessorResolver httpContentProcessorResolver;
 
     /**
@@ -40,7 +40,7 @@ class RxJava2NettyBinderRegistrar implements BeanCreatedEventListener<RequestBin
      * @param httpContentProcessorResolver The processor resolver
      */
     RxJava2NettyBinderRegistrar(
-            @Nullable ConversionService<?> conversionService,
+            @Nullable ConversionService conversionService,
             HttpContentProcessorResolver httpContentProcessorResolver) {
         this.conversionService = conversionService == null ? ConversionService.SHARED : conversionService;
         this.httpContentProcessorResolver = httpContentProcessorResolver;
