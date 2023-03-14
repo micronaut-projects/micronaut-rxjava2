@@ -1,13 +1,16 @@
 [versions]
 managed-rxjava2 = "2.2.21"
 
-groovy = '4.0.6'
+groovy = '4.0.10'
 spock = "2.3-groovy-4.0"
 
 micronaut = "4.0.0-SNAPSHOT"
 micronaut-docs = "2.0.0"
 micronaut-test = "4.0.0-SNAPSHOT"
+micronaut-validation = "4.0.0-SNAPSHOT"
 
 [libraries]
 managed-rxjava2 = { module = "io.reactivex.rxjava2:rxjava", version.ref = "managed-rxjava2" }
 groovy-json = { module = "org.apache.groovy:groovy-json", version.ref = "groovy" }
+
+micronaut-validation = { module = "io.micronaut.validation:micronaut-validation-bom", version.ref = "micronaut-validation" }

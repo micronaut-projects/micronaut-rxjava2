@@ -5,14 +5,16 @@ plugins {
 dependencies {
     annotationProcessor mn.micronaut.graal
 
-    api project(":rxjava2")
+    api projects.micronautRxjava2
     api mn.micronaut.http.client
 
-    testAnnotationProcessor mn.micronaut.validation
+    testAnnotationProcessor mnValidation.micronaut.validation.processor
     testAnnotationProcessor mn.micronaut.inject.java
+
     testImplementation mn.micronaut.retry
-    testImplementation mn.micronaut.validation
+    testImplementation mnValidation.micronaut.validation.processor
+    testImplementation mnValidation.micronaut.validation
     testImplementation mn.micronaut.jackson.databind
     testImplementation libs.groovy.json
-    testImplementation project(":rxjava2-http-server-netty")
+    testImplementation projects.micronautRxjava2HttpServerNetty
 }
