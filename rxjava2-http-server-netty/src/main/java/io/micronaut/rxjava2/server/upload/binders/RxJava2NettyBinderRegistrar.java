@@ -49,15 +49,15 @@ class RxJava2NettyBinderRegistrar implements BeanCreatedEventListener<RequestBin
     @Override
     public RequestBinderRegistry onCreated(BeanCreatedEvent<RequestBinderRegistry> event) {
         RequestBinderRegistry registry = event.getBean();
-        registry.addRequestArgumentBinder(new MaybeBodyBinder(
+        registry.addArgumentBinder(new MaybeBodyBinder(
                 conversionService,
                 httpContentProcessorResolver
         ));
-        registry.addRequestArgumentBinder(new ObservableBodyBinder(
+        registry.addArgumentBinder(new ObservableBodyBinder(
                 conversionService,
                 httpContentProcessorResolver
         ));
-        registry.addRequestArgumentBinder(new SingleBodyBinder(
+        registry.addArgumentBinder(new SingleBodyBinder(
                 conversionService,
                 httpContentProcessorResolver
         ));

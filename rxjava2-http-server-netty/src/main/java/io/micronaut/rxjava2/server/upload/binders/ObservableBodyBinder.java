@@ -21,6 +21,7 @@ import io.micronaut.core.convert.ArgumentConversionContext;
 import io.micronaut.core.convert.ConversionContext;
 import io.micronaut.core.convert.ConversionService;
 import io.micronaut.core.type.Argument;
+import io.micronaut.core.type.GenericArgument;
 import io.micronaut.http.HttpRequest;
 import io.micronaut.http.bind.binders.DefaultBodyAnnotationBinder;
 import io.micronaut.http.bind.binders.NonBlockingBodyArgumentBinder;
@@ -30,10 +31,11 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import org.reactivestreams.Publisher;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+
+import static io.micronaut.rxjava2.server.upload.binders.SingleBodyBinder.getPublisherArgument;
 
 /**
  * Bindings {@link io.micronaut.http.annotation.Body} arguments of type {@link Observable}.
@@ -46,7 +48,7 @@ public class ObservableBodyBinder extends DefaultBodyAnnotationBinder<Observable
 
     public static final Argument<Observable> TYPE = Argument.of(Observable.class);
 
-    private PublisherBodyBinder publisherBodyBinder;
+    private final PublisherBodyBinder publisherBodyBinder;
 
     /**
      * @param conversionService            The conversion service
@@ -72,10 +74,10 @@ public class ObservableBodyBinder extends DefaultBodyAnnotationBinder<Observable
     @SuppressWarnings("unchecked")
     @Override
     public BindingResult<Observable> bind(ArgumentConversionContext<Observable> context, HttpRequest<?> source) {
-        Collection<Argument<?>> typeVariables = context.getArgument().getTypeVariables().values();
-
-        BindingResult<Publisher> result = publisherBodyBinder.bind(
-            ConversionContext.of(Argument.of(Publisher.class, typeVariables.toArray(new Argument[0]))),
+        Argument<Observable> observableArgument = context.getArgument();
+        Argument<Publisher<?>> argument = getPublisherArgument(observableArgument);
+        BindingResult<Publisher<?>> result = publisherBodyBinder.bind(
+            ConversionContext.of(argument),
             source
         );
         if (result.isPresentAndSatisfied()) {

@@ -15,6 +15,12 @@
  */
 package io.micronaut.rxjava2.server.upload.binders;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
 import io.micronaut.core.annotation.Internal;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.convert.ArgumentConversionContext;
@@ -30,11 +36,6 @@ import io.reactivex.Single;
 import io.reactivex.SingleSource;
 import org.reactivestreams.Publisher;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-
 /**
  * Bindings {@link io.micronaut.http.annotation.Body} arguments of type {@link Single}.
  *
@@ -46,7 +47,7 @@ public class SingleBodyBinder extends DefaultBodyAnnotationBinder<Single> implem
 
     public static final Argument<Single> TYPE = Argument.of(Single.class);
 
-    private PublisherBodyBinder publisherBodyBinder;
+    private final PublisherBodyBinder publisherBodyBinder;
 
     /**
      * @param conversionService           The conversion service
@@ -72,15 +73,26 @@ public class SingleBodyBinder extends DefaultBodyAnnotationBinder<Single> implem
     @SuppressWarnings("unchecked")
     @Override
     public BindingResult<Single> bind(ArgumentConversionContext<Single> context, HttpRequest<?> source) {
-        Collection<Argument<?>> typeVariables = context.getArgument().getTypeVariables().values();
-
-        BindingResult<Publisher> result = publisherBodyBinder.bind(
-            ConversionContext.of(Argument.of(Publisher.class, typeVariables.toArray(Argument.ZERO_ARGUMENTS))),
+        Argument<Single> singleArgument = context.getArgument();
+        Argument<Publisher<?>> argument = getPublisherArgument(singleArgument);
+        BindingResult<Publisher<?>> result = publisherBodyBinder.bind(
+            ConversionContext.of(argument),
             source
         );
         if (result.isPresentAndSatisfied()) {
             return () -> Optional.of(Single.fromPublisher(result.get()));
         }
         return BindingResult.EMPTY;
+    }
+
+    static Argument<Publisher<?>> getPublisherArgument(Argument<?> singleArgument) {
+        Map<String, Argument<?>> typeVariablesMap = singleArgument.getTypeVariables();
+        Collection<Argument<?>> typeVariables = typeVariablesMap.values();
+        return (Argument<Publisher<?>>) Argument.of(
+            singleArgument.getType(),
+            singleArgument.getName(),
+            singleArgument.getAnnotationMetadata(),
+            typeVariables.toArray(Argument.ZERO_ARGUMENTS)
+        );
     }
 }
