@@ -43,7 +43,7 @@ import org.reactivestreams.Publisher;
  * @since 1.0
  */
 @Internal
-public class SingleBodyBinder extends DefaultBodyAnnotationBinder<Single> implements NonBlockingBodyArgumentBinder<Single> {
+public class SingleBodyBinder implements NonBlockingBodyArgumentBinder<Single> {
 
     public static final Argument<Single> TYPE = Argument.of(Single.class);
 
@@ -55,7 +55,6 @@ public class SingleBodyBinder extends DefaultBodyAnnotationBinder<Single> implem
      */
     public SingleBodyBinder(ConversionService conversionService,
                             HttpContentProcessorResolver httpContentProcessorResolver) {
-        super(conversionService);
         this.publisherBodyBinder = new PublisherBodyBinder(conversionService, httpContentProcessorResolver);
     }
 

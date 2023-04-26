@@ -44,7 +44,7 @@ import static io.micronaut.rxjava2.server.upload.binders.SingleBodyBinder.getPub
  * @since 1.0
  */
 @Internal
-public class ObservableBodyBinder extends DefaultBodyAnnotationBinder<Observable> implements NonBlockingBodyArgumentBinder<Observable> {
+public class ObservableBodyBinder implements NonBlockingBodyArgumentBinder<Observable> {
 
     public static final Argument<Observable> TYPE = Argument.of(Observable.class);
 
@@ -56,7 +56,6 @@ public class ObservableBodyBinder extends DefaultBodyAnnotationBinder<Observable
      */
     public ObservableBodyBinder(ConversionService conversionService,
                                 HttpContentProcessorResolver httpContentProcessorResolver) {
-        super(conversionService);
         this.publisherBodyBinder = new PublisherBodyBinder(conversionService, httpContentProcessorResolver);
     }
 

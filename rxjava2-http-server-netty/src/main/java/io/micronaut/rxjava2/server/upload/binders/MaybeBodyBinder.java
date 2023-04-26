@@ -46,7 +46,7 @@ import static io.micronaut.rxjava2.server.upload.binders.SingleBodyBinder.getPub
  * @since 1.0
  */
 @Internal
-public class MaybeBodyBinder extends DefaultBodyAnnotationBinder<Maybe> implements NonBlockingBodyArgumentBinder<Maybe> {
+public class MaybeBodyBinder implements NonBlockingBodyArgumentBinder<Maybe> {
 
     public static final Argument<Maybe> TYPE = Argument.of(Maybe.class);
 
@@ -58,7 +58,6 @@ public class MaybeBodyBinder extends DefaultBodyAnnotationBinder<Maybe> implemen
      */
     public MaybeBodyBinder(ConversionService conversionService,
                            HttpContentProcessorResolver httpContentProcessorResolver) {
-        super(conversionService);
         this.publisherBodyBinder = new PublisherBodyBinder(conversionService, httpContentProcessorResolver);
     }
 
