@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="../../../../../../script-dir/jquery-ui.min.css" title="Style">
 <link rel="stylesheet" type="text/css" href="../../../../../../jquery-ui.overrides.css" title="Style">
 <script type="text/javascript" src="../../../../../../script.js"></script>
-<script type="text/javascript" src="../../../../../../script-dir/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="../../../../../../script-dir/jquery-3.6.1.min.js"></script>
 <script type="text/javascript" src="../../../../../../script-dir/jquery-ui.min.js"></script>
 </head>
 <body class="class-declaration-page">
@@ -71,9 +71,7 @@ loadScripts(document, 'script');</script>
 <h1 title="Class SingleBodyBinder" class="title">Class SingleBodyBinder</h1>
 </div>
 <div class="inheritance" title="Inheritance Tree"><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">java.lang.Object</a>
-<div class="inheritance">io.micronaut.http.bind.binders.DefaultBodyAnnotationBinder&lt;io.reactivex.Single&gt;
 <div class="inheritance">io.micronaut.rxjava2.server.upload.binders.SingleBodyBinder</div>
-</div>
 </div>
 <section class="class-description" id="class-description">
 <dl class="notes">
@@ -83,7 +81,7 @@ loadScripts(document, 'script');</script>
 <hr>
 <div class="type-signature"><span class="annotations">@Internal
 </span><span class="modifiers">public class </span><span class="element-name type-name-label">SingleBodyBinder</span>
-<span class="extends-implements">extends io.micronaut.http.bind.binders.DefaultBodyAnnotationBinder&lt;io.reactivex.Single&gt;
+<span class="extends-implements">extends <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>
 implements io.micronaut.http.bind.binders.NonBlockingBodyArgumentBinder&lt;io.reactivex.Single&gt;</span></div>
 <div class="block">Bindings <code>Body</code> arguments of type <code>Single</code>.</div>
 <dl class="notes">
@@ -117,9 +115,6 @@ implements io.micronaut.http.bind.binders.NonBlockingBodyArgumentBinder&lt;io.re
 <div class="col-second even-row-color"><code><a href="#TYPE" class="member-name-link">TYPE</a></code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 </div>
-<div class="inherited-list">
-<h3 id="fields-inherited-from-class-io.micronaut.http.bind.binders.DefaultBodyAnnotationBinder">Fields inherited from class&nbsp;io.micronaut.http.bind.binders.DefaultBodyAnnotationBinder</h3>
-<code>conversionService</code></div>
 </section>
 </li>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
@@ -161,14 +156,14 @@ implements io.micronaut.http.bind.binders.NonBlockingBodyArgumentBinder&lt;io.re
 </div>
 </div>
 <div class="inherited-list">
-<h3 id="methods-inherited-from-class-io.micronaut.http.bind.binders.DefaultBodyAnnotationBinder">Methods inherited from class&nbsp;io.micronaut.http.bind.binders.DefaultBodyAnnotationBinder</h3>
-<code>getAnnotationType</code></div>
-<div class="inherited-list">
 <h3 id="methods-inherited-from-class-java.lang.Object">Methods inherited from class&nbsp;java.lang.<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a></h3>
 <code><a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#clone()" title="class or interface in java.lang" class="external-link">clone</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#equals(java.lang.Object)" title="class or interface in java.lang" class="external-link">equals</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#finalize()" title="class or interface in java.lang" class="external-link">finalize</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#getClass()" title="class or interface in java.lang" class="external-link">getClass</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#hashCode()" title="class or interface in java.lang" class="external-link">hashCode</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notify()" title="class or interface in java.lang" class="external-link">notify</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#notifyAll()" title="class or interface in java.lang" class="external-link">notifyAll</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#toString()" title="class or interface in java.lang" class="external-link">toString</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait()" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long)" title="class or interface in java.lang" class="external-link">wait</a>, <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html#wait(long,int)" title="class or interface in java.lang" class="external-link">wait</a></code></div>
 <div class="inherited-list">
 <h3 id="methods-inherited-from-class-io.micronaut.http.bind.binders.BodyArgumentBinder">Methods inherited from interface&nbsp;io.micronaut.http.bind.binders.BodyArgumentBinder</h3>
 <code>getAnnotationType</code></div>
+<div class="inherited-list">
+<h3 id="methods-inherited-from-class-io.micronaut.http.bind.binders.TypedRequestArgumentBinder">Methods inherited from interface&nbsp;io.micronaut.http.bind.binders.TypedRequestArgumentBinder</h3>
+<code>matches</code></div>
 </section>
 </li>
 </ul>
@@ -243,8 +238,6 @@ implements io.micronaut.http.bind.binders.NonBlockingBodyArgumentBinder&lt;io.re
 <dl class="notes">
 <dt>Specified by:</dt>
 <dd><code>bind</code>&nbsp;in interface&nbsp;<code>io.micronaut.core.bind.ArgumentBinder&lt;io.reactivex.Single,<wbr>io.micronaut.http.HttpRequest&lt;?&gt;&gt;</code></dd>
-<dt>Overrides:</dt>
-<dd><code>bind</code>&nbsp;in class&nbsp;<code>io.micronaut.http.bind.binders.DefaultBodyAnnotationBinder&lt;io.reactivex.Single&gt;</code></dd>
 </dl>
 </section>
 </li>
