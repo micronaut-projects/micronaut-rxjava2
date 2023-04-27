@@ -22,7 +22,6 @@ import io.micronaut.core.convert.ConversionContext;
 import io.micronaut.core.convert.ConversionService;
 import io.micronaut.core.type.Argument;
 import io.micronaut.http.HttpRequest;
-import io.micronaut.http.bind.binders.DefaultBodyAnnotationBinder;
 import io.micronaut.http.bind.binders.NonBlockingBodyArgumentBinder;
 import io.micronaut.http.server.netty.HttpContentProcessorResolver;
 import io.micronaut.http.server.netty.binders.PublisherBodyBinder;
@@ -33,6 +32,7 @@ import org.reactivestreams.Publisher;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -42,11 +42,11 @@ import java.util.Optional;
  * @since 1.0
  */
 @Internal
-public class SingleBodyBinder extends DefaultBodyAnnotationBinder<Single> implements NonBlockingBodyArgumentBinder<Single> {
+public class SingleBodyBinder implements NonBlockingBodyArgumentBinder<Single> {
 
     public static final Argument<Single> TYPE = Argument.of(Single.class);
 
-    private PublisherBodyBinder publisherBodyBinder;
+    private final PublisherBodyBinder publisherBodyBinder;
 
     /**
      * @param conversionService           The conversion service
@@ -54,7 +54,6 @@ public class SingleBodyBinder extends DefaultBodyAnnotationBinder<Single> implem
      */
     public SingleBodyBinder(ConversionService conversionService,
                             HttpContentProcessorResolver httpContentProcessorResolver) {
-        super(conversionService);
         this.publisherBodyBinder = new PublisherBodyBinder(conversionService, httpContentProcessorResolver);
     }
 
@@ -72,15 +71,26 @@ public class SingleBodyBinder extends DefaultBodyAnnotationBinder<Single> implem
     @SuppressWarnings("unchecked")
     @Override
     public BindingResult<Single> bind(ArgumentConversionContext<Single> context, HttpRequest<?> source) {
-        Collection<Argument<?>> typeVariables = context.getArgument().getTypeVariables().values();
-
-        BindingResult<Publisher> result = publisherBodyBinder.bind(
-            ConversionContext.of(Argument.of(Publisher.class, typeVariables.toArray(Argument.ZERO_ARGUMENTS))),
+        Argument<Single> singleArgument = context.getArgument();
+        Argument<Publisher<?>> argument = getPublisherArgument(singleArgument);
+        BindingResult<Publisher<?>> result = publisherBodyBinder.bind(
+            ConversionContext.of(argument),
             source
         );
         if (result.isPresentAndSatisfied()) {
             return () -> Optional.of(Single.fromPublisher(result.get()));
         }
         return BindingResult.EMPTY;
+    }
+
+    static Argument<Publisher<?>> getPublisherArgument(Argument<?> singleArgument) {
+        Map<String, Argument<?>> typeVariablesMap = singleArgument.getTypeVariables();
+        Collection<Argument<?>> typeVariables = typeVariablesMap.values();
+        return (Argument<Publisher<?>>) Argument.of(
+            singleArgument.getType(),
+            singleArgument.getName(),
+            singleArgument.getAnnotationMetadata(),
+            typeVariables.toArray(Argument.ZERO_ARGUMENTS)
+        );
     }
 }

@@ -22,7 +22,6 @@ import io.micronaut.core.convert.ConversionContext;
 import io.micronaut.core.convert.ConversionService;
 import io.micronaut.core.type.Argument;
 import io.micronaut.http.HttpRequest;
-import io.micronaut.http.bind.binders.DefaultBodyAnnotationBinder;
 import io.micronaut.http.bind.binders.NonBlockingBodyArgumentBinder;
 import io.micronaut.http.server.netty.HttpContentProcessorResolver;
 import io.micronaut.http.server.netty.binders.PublisherBodyBinder;
@@ -31,10 +30,11 @@ import io.reactivex.MaybeSource;
 import io.reactivex.Single;
 import org.reactivestreams.Publisher;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+
+import static io.micronaut.rxjava2.server.upload.binders.SingleBodyBinder.getPublisherArgument;
 
 /**
  * Bindings {@link io.micronaut.http.annotation.Body} arguments of type {@link Maybe}.
@@ -43,11 +43,11 @@ import java.util.Optional;
  * @since 1.0
  */
 @Internal
-public class MaybeBodyBinder extends DefaultBodyAnnotationBinder<Maybe> implements NonBlockingBodyArgumentBinder<Maybe> {
+public class MaybeBodyBinder implements NonBlockingBodyArgumentBinder<Maybe> {
 
     public static final Argument<Maybe> TYPE = Argument.of(Maybe.class);
 
-    private PublisherBodyBinder publisherBodyBinder;
+    private final PublisherBodyBinder publisherBodyBinder;
 
     /**
      * @param conversionService            The conversion service
@@ -55,7 +55,6 @@ public class MaybeBodyBinder extends DefaultBodyAnnotationBinder<Maybe> implemen
      */
     public MaybeBodyBinder(ConversionService conversionService,
                            HttpContentProcessorResolver httpContentProcessorResolver) {
-        super(conversionService);
         this.publisherBodyBinder = new PublisherBodyBinder(conversionService, httpContentProcessorResolver);
     }
 
@@ -70,13 +69,12 @@ public class MaybeBodyBinder extends DefaultBodyAnnotationBinder<Maybe> implemen
         return TYPE;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public BindingResult<Maybe> bind(ArgumentConversionContext<Maybe> context, HttpRequest<?> source) {
-        Collection<Argument<?>> typeVariables = context.getArgument().getTypeVariables().values();
-
-        BindingResult<Publisher> result = publisherBodyBinder.bind(
-                ConversionContext.of(Argument.of(Publisher.class, typeVariables.toArray(Argument.ZERO_ARGUMENTS))),
+        Argument<Maybe> maybeArgument = context.getArgument();
+        Argument<Publisher<?>> argument = getPublisherArgument(maybeArgument);
+        BindingResult<Publisher<?>> result = publisherBodyBinder.bind(
+                ConversionContext.of(argument),
                 source
         );
         if (result.isPresentAndSatisfied()) {
