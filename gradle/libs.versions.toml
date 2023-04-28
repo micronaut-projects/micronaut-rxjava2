@@ -7,7 +7,7 @@ spock = "2.3-groovy-4.0"
 micronaut = "4.0.0-M2"
 micronaut-docs = "2.0.0"
 micronaut-test = "4.0.0-M2"
-micronaut-validation = "4.0.0-M4"
+micronaut-validation = "4.0.0-SNAPSHOT"
 
 [libraries]
 managed-rxjava2 = { module = "io.reactivex.rxjava2:rxjava", version.ref = "managed-rxjava2" }
