@@ -10,6 +10,9 @@ micronaut-test = "4.0.0-M2"
 micronaut-validation = "4.0.0-M4"
 
 [libraries]
+# Core
+micronaut-core = { module = 'io.micronaut:micronaut-core-bom', version.ref = 'micronaut' }
+
 managed-rxjava2 = { module = "io.reactivex.rxjava2:rxjava", version.ref = "managed-rxjava2" }
 groovy-json = { module = "org.apache.groovy:groovy-json", version.ref = "groovy" }
 
