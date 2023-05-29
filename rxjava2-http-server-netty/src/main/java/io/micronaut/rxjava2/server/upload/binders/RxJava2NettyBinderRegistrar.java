@@ -15,52 +15,64 @@
  */
 package io.micronaut.rxjava2.server.upload.binders;
 
+import java.util.Collections;
+import java.util.List;
+
 import io.micronaut.context.annotation.Requires;
 import io.micronaut.context.event.BeanCreatedEvent;
 import io.micronaut.context.event.BeanCreatedEventListener;
+import io.micronaut.core.annotation.AnnotationMetadata;
 import io.micronaut.core.annotation.Internal;
-import io.micronaut.core.annotation.Nullable;
-import io.micronaut.core.convert.ConversionService;
+import io.micronaut.core.bind.annotation.Bindable;
+import io.micronaut.core.type.GenericArgument;
+import io.micronaut.http.annotation.Body;
 import io.micronaut.http.bind.RequestBinderRegistry;
-import io.micronaut.http.server.netty.HttpContentProcessorResolver;
+import io.micronaut.http.bind.binders.BodyArgumentBinder;
+import io.micronaut.inject.annotation.MutableAnnotationMetadata;
 import io.reactivex.Flowable;
 import jakarta.inject.Singleton;
+import org.reactivestreams.Publisher;
 
 @Singleton
 @Internal
 @Requires(classes = Flowable.class)
 class RxJava2NettyBinderRegistrar implements BeanCreatedEventListener<RequestBinderRegistry> {
-    private final ConversionService conversionService;
-    private final HttpContentProcessorResolver httpContentProcessorResolver;
 
     /**
      * Default constructor.
-     *
-     * @param conversionService            The conversion service
-     * @param httpContentProcessorResolver The processor resolver
      */
-    RxJava2NettyBinderRegistrar(
-            @Nullable ConversionService conversionService,
-            HttpContentProcessorResolver httpContentProcessorResolver) {
-        this.conversionService = conversionService == null ? ConversionService.SHARED : conversionService;
-        this.httpContentProcessorResolver = httpContentProcessorResolver;
+    RxJava2NettyBinderRegistrar() {
     }
 
     @Override
+    @SuppressWarnings("java:S1171")
     public RequestBinderRegistry onCreated(BeanCreatedEvent<RequestBinderRegistry> event) {
         RequestBinderRegistry registry = event.getBean();
-        registry.addArgumentBinder(new MaybeBodyBinder(
-                conversionService,
-                httpContentProcessorResolver
-        ));
-        registry.addArgumentBinder(new ObservableBodyBinder(
-                conversionService,
-                httpContentProcessorResolver
-        ));
-        registry.addArgumentBinder(new SingleBodyBinder(
-                conversionService,
-                httpContentProcessorResolver
-        ));
+        registry.findArgumentBinder(new GenericArgument<Publisher<Object>>() {
+            final MutableAnnotationMetadata annotationMetadata = new MutableAnnotationMetadata();
+            {
+                annotationMetadata.addAnnotation(Body.class.getName(), Collections.emptyMap());
+                annotationMetadata.addStereotype(List.of(Body.class.getName()), Bindable.class.getName(), Collections.emptyMap());
+            }
+            @Override
+            public AnnotationMetadata getAnnotationMetadata() {
+                return annotationMetadata;
+            }
+        }).ifPresent(argumentBinder -> {
+            if (argumentBinder instanceof BodyArgumentBinder<Publisher<Object>> bodyArgumentBinder) {
+
+                registry.addArgumentBinder(new MaybeBodyBinder(
+                    bodyArgumentBinder
+                ));
+                registry.addArgumentBinder(new ObservableBodyBinder(
+                    bodyArgumentBinder
+                ));
+                registry.addArgumentBinder(new SingleBodyBinder(
+                    bodyArgumentBinder
+                ));
+            }
+        });
+
         return registry;
     }
 }
