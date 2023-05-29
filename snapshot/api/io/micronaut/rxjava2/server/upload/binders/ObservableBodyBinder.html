@@ -125,8 +125,7 @@ implements io.micronaut.http.bind.binders.NonBlockingBodyArgumentBinder&lt;io.re
 <div class="summary-table two-column-summary">
 <div class="table-header col-first">Constructor</div>
 <div class="table-header col-last">Description</div>
-<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(io.micronaut.core.convert.ConversionService,io.micronaut.http.server.netty.HttpContentProcessorResolver)" class="member-name-link">ObservableBodyBinder</a><wbr>(io.micronaut.core.convert.ConversionService&nbsp;conversionService,
- io.micronaut.http.server.netty.HttpContentProcessorResolver&nbsp;httpContentProcessorResolver)</code></div>
+<div class="col-constructor-name even-row-color"><code><a href="#%3Cinit%3E(io.micronaut.http.bind.binders.BodyArgumentBinder)" class="member-name-link">ObservableBodyBinder</a><wbr>(io.micronaut.http.bind.binders.BodyArgumentBinder&lt;org.reactivestreams.Publisher&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;&gt;&nbsp;publisherBodyBinder)</code></div>
 <div class="col-last even-row-color">&nbsp;</div>
 </div>
 </section>
@@ -190,14 +189,12 @@ implements io.micronaut.http.bind.binders.NonBlockingBodyArgumentBinder&lt;io.re
 <h2>Constructor Details</h2>
 <ul class="member-list">
 <li>
-<section class="detail" id="&lt;init&gt;(io.micronaut.core.convert.ConversionService,io.micronaut.http.server.netty.HttpContentProcessorResolver)">
+<section class="detail" id="&lt;init&gt;(io.micronaut.http.bind.binders.BodyArgumentBinder)">
 <h3>ObservableBodyBinder</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ObservableBodyBinder</span><wbr><span class="parameters">(io.micronaut.core.convert.ConversionService&nbsp;conversionService,
- io.micronaut.http.server.netty.HttpContentProcessorResolver&nbsp;httpContentProcessorResolver)</span></div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="element-name">ObservableBodyBinder</span><wbr><span class="parameters">(io.micronaut.http.bind.binders.BodyArgumentBinder&lt;org.reactivestreams.Publisher&lt;<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Object.html" title="class or interface in java.lang" class="external-link">Object</a>&gt;&gt;&nbsp;publisherBodyBinder)</span></div>
 <dl class="notes">
 <dt>Parameters:</dt>
-<dd><code>conversionService</code> - The conversion service</dd>
-<dd><code>httpContentProcessorResolver</code> - The http content processor resolver</dd>
+<dd><code>publisherBodyBinder</code> - the publisher body binder</dd>
 </dl>
 </section>
 </li>
