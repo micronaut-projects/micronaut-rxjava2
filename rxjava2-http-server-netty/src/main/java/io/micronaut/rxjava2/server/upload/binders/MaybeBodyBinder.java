@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import io.micronaut.core.annotation.AnnotationMetadata;
 import io.micronaut.core.annotation.Internal;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.convert.ArgumentConversionContext;
@@ -77,6 +78,11 @@ public class MaybeBodyBinder implements NonBlockingBodyArgumentBinder<Maybe> {
             @Override
             public Map<String, Argument<?>> getTypeVariables() {
                 return maybeArgument.getTypeVariables();
+            }
+
+            @Override
+            public AnnotationMetadata getAnnotationMetadata() {
+                return maybeArgument.getAnnotationMetadata();
             }
         };
         BindingResult<Publisher<Object>> result = publisherBodyBinder.bind(
