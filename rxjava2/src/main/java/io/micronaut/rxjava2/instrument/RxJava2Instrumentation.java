@@ -30,7 +30,7 @@ import jakarta.annotation.PreDestroy;
  * @author Graeme Rocher
  * @since 1.0
  */
-@Requires(classes = RxJavaPlugins.class)
+@Requires(classes = {RxJavaPlugins.class, PropagatedContext.class})
 @Context
 @Internal
 final class RxJava2Instrumentation {
