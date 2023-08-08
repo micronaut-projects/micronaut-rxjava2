@@ -1,4 +1,4 @@
 If you are using Micronaut with Netty, add the following dependency to bind the HTTP Request's body to a RxJava 2 types (`Single`, `Maybe`, `Observable`)
 
-dependency:io.micronaut.rxjava2:micronaut-rxjava2-http-server-netty[scope="compile", version="{version}"]
+dependency:io.micronaut.rxjava2:micronaut-rxjava2-http-server-netty[scope="compile"]
 
