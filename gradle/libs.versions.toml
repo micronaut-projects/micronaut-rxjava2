@@ -1,7 +1,7 @@
 [versions]
 managed-rxjava2 = "2.2.21"
 
-groovy = '4.0.21'
+groovy = '4.0.22'
 spock = "2.3-groovy-4.0"
 
 micronaut = "4.5.1"
