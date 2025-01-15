@@ -4,10 +4,11 @@ managed-rxjava2 = "2.2.21"
 groovy = '4.0.23'
 spock = "2.3-groovy-4.0"
 
-micronaut = "4.7.1"
+micronaut = "4.7.11"
 micronaut-docs = "2.0.0"
 micronaut-test = "4.5.0"
 micronaut-validation = "4.8.0"
+sonatype-scan = "3.0.0"
 
 [libraries]
 micronaut-core = { module = 'io.micronaut:micronaut-core-bom', version.ref = 'micronaut' }
@@ -15,3 +16,4 @@ managed-rxjava2 = { module = "io.reactivex.rxjava2:rxjava", version.ref = "manag
 groovy-json = { module = "org.apache.groovy:groovy-json", version.ref = "groovy" }
 
 micronaut-validation = { module = "io.micronaut.validation:micronaut-validation-bom", version.ref = "micronaut-validation" }
+sonatype-scan = { module = "org.sonatype.gradle.plugins:scan-gradle-plugin", version.ref = "sonatype-scan" }
