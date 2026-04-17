@@ -1,0 +1,30 @@
+plugins {
+    id 'java-library'
+    id 'groovy'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testAnnotationProcessor mn.micronaut.inject.java
+    testAnnotationProcessor mnJaxrs.micronaut.jaxrs.processor
+    testAnnotationProcessor mnSerde.micronaut.serde.processor
+
+    testCompileOnly mn.micronaut.inject.groovy
+
+    testImplementation libs.spock.core
+
+    testRuntimeOnly libs.managed.junit.platform.launcher
+
+    testImplementation projects.micronautRxjava2
+    testImplementation projects.micronautRxjava2HttpServerNetty
+    testImplementation mn.micronaut.http.client
+    testImplementation mnJaxrs.micronaut.jaxrs.server
+    testImplementation mnSerde.micronaut.serde.jackson
+}
+
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+}
