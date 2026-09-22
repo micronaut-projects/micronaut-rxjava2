@@ -11,7 +11,7 @@ micronaut-validation = "4.11.0"
 
 # The Python compiler (micronaut-inject-python) of test-suite-python ships with Micronaut core 5.2+, which this branch
 # does not use: only that suite resolves these Micronaut 5 versions of core and test
-micronaut-python = "5.2.2"
+micronaut-python = "5.2.3"
 micronaut-test-python = "5.1.1"
 
 [libraries]
