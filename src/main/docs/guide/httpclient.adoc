@@ -4,12 +4,12 @@ dependency:io.micronaut.rxjava2:micronaut-rxjava2-http-client[scope="compile"]
 
 To use the RxJava 2 variation of the Micronaut HTTP client inject the api:rxjava2.http.client.RxHttpClient[] interface (or one of the other variants). For example:
 
-[source,java]
-----
-import io.micronaut.rxjava2.http.client.*;
+snippet::io.micronaut.rxjava2.docs.RxHttpClientTest[tags="imports,clients", indent=0, title="Injecting the RxJava 2 clients"]
 
-@Inject Rx2HttpClient httpClient; // regular client
-@Inject Rx2SseClient sseClient; // server sent events
-@Inject Rx2StreamingHttpClient streamingClient; // streaming
-----
+<1> The regular client, api:rxjava2.http.client.RxHttpClient[]
+<2> The server sent events client, api:rxjava2.http.client.sse.RxSseClient[]
+<3> The streaming client, api:rxjava2.http.client.RxStreamingHttpClient[]
 
+The methods of these clients return RxJava 2 types (`Flowable`, `Single`, `Maybe`) instead of Reactive Streams `Publisher` instances:
+
+snippet::io.micronaut.rxjava2.docs.RxHttpClientTest[tags="retrieve", indent=0, title="Using the RxJava 2 client"]
