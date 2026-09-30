@@ -1,10 +1,9 @@
 from dataclasses import dataclass
 
-from micronaut.core.annotation import Introspected, ReflectiveAccess
+from micronaut.core.annotation import Introspected
 
 
-@ReflectiveAccess
 @Introspected
 @dataclass
 class Message:
-    text: str | None = None
+    text: str

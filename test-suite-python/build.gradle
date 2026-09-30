@@ -34,7 +34,3 @@ dependencies {
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
     testRuntimeOnly mnLogging.logback.classic
 }
-
-tasks.withType(Test).configureEach {
-    systemProperty "micronaut.python.pool.enabled", "false"
-}
