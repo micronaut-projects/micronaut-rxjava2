@@ -51,6 +51,8 @@ jobs:
         id: pre-build
         with:
           distribution: 'graalvm'
+          # micronaut-build 8 requires a Java 25 JVM to run Gradle (the action defaults to 21)
+          gradle-java: '25'
           java: ${{ matrix.java }}
       - name: Build Steps
         uses: micronaut-projects/github-actions/graalvm/build@master
